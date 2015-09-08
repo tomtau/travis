@@ -28,7 +28,7 @@ requestH = [("Accept", "application/vnd.travis-ci.2+json"),
 
 -- |fetches information about public repository on Travis CI
 -- may return a tuple of repository and its builds information
-fetchRepository :: AccountName -> RepositoryName -> IO (Maybe RepositoryRaw, Maybe [BuildRaw])
+fetchRepository :: AccountName -> RepositoryName -> IO (Maybe RepositoryRaw, Maybe BuildsRaw)
 fetchRepository acname reponame = do
   -- repository info
   let coreUrl = travisAPIBaseURL ++ acname ++ "/" ++ reponame
@@ -43,4 +43,4 @@ fetchRepository acname reponame = do
   let request2 = req2 { requestHeaders = requestH}
   _response2 <- httpLbs request2 manager
   let repobuilds = decode (responseBody _response2) :: Maybe BuildsRaw
-  return (fmap repo repository, fmap builds repobuilds)
+  return (fmap repo repository, repobuilds)

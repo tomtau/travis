@@ -1,5 +1,5 @@
 name:                travis
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            A simple client implementation using Travis CI API.
 description:         A simple client implementation using Travis CI API.
 homepage:            http://github.com/tomtau/travis#readme

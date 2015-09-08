@@ -40,7 +40,7 @@ instance ToJSON RepoRaw
 data BuildsRaw =
   BuildsRaw { builds  :: [BuildRaw]
             , jobs    :: Maybe [Object]
-            , commits :: [Object]
+            , commits :: [Commit]
    } deriving (Show, Generic)
 
 data BuildRaw =
@@ -67,5 +67,28 @@ instance FromJSON BuildRaw where
                 fieldLabelModifier = drop 1 }
 
 instance ToJSON BuildRaw where
+  toJSON = genericToJSON defaultOptions {
+             fieldLabelModifier = drop 1 }
+
+-- |Data type representing: <http://docs.travis-ci.com/api/#commits>
+-- TODO: more precise parsing / types
+data Commit =
+ Commit {   cid              :: Int
+          , csha             :: String
+          , cbranch          :: String
+          , cmessage         :: String
+          , ccommitted_at    :: String
+          , cauthor_name     :: String
+          , cauthor_email    :: String
+          , ccommitter_name  :: String
+          , ccommitter_email :: String
+          , ccompare_url     :: String
+          } deriving (Show, Generic)
+
+instance FromJSON Commit where
+  parseJSON = genericParseJSON defaultOptions {
+                fieldLabelModifier = drop 1 }
+
+instance ToJSON Commit where
   toJSON = genericToJSON defaultOptions {
              fieldLabelModifier = drop 1 }
