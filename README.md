@@ -2,6 +2,7 @@ Haskell Travis Client
 =====================
 
 A simple client implementation using [Travis CI API](http://docs.travis-ci.com/api/).
+[![travis build status](https://img.shields.io/travis/tomtau/travis.svg)](https://travis-ci.org/tomtau/travis)
 
 Usage
 -----
